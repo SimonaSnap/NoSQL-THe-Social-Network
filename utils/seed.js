@@ -17,7 +17,7 @@ connection.once("open", async () =>
     for (let i = 0; i < 5; i++)
     {
         const usernames = getRandomName(5);
-        const emails = getRandomEmails(5);
+        const emails = getRandomEmail(5);
 
         users.push({
             usernames,
