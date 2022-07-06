@@ -13,17 +13,28 @@ connection.once("open", async () =>
     await Thought.deleteMany({});
 
     const users = [];
+    const thoughts = [];
 
     for (let i = 0; i < 5; i++)
     {
-        const usernames = getRandomName(5);
-        const emails = getRandomEmail(5);
-
         users.push({
-            usernames,
-            emails,
+            thoughtText: getRandomText(),
+            username: getRandomName(),
         });
     }
+
+    await Thought.collection.insertMany(thoughts);
+
+    thoughts.forEach((thought) =>
+    {
+        users.push({
+            username: thought.username,
+            email: getRandomEmail(),
+            thoughts: [thought._id],
+        });
+    });
+
+    await User.collection.insertMany(users);
 
     console.table(users);
     console.info("seeds complete");

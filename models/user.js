@@ -1,5 +1,4 @@
 const { Schema, model } = require("mongoose");
-const friendCount = require("./friends");
 
 //Schema for the User model
 const userSchema = new Schema(
@@ -16,12 +15,18 @@ const userSchema = new Schema(
             unique: true,
             validator: {
                 $jsonSchema: {
-                    email: { $regex: /@mongodb\.com$/ },
+                    email: { $regex: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/ },
                 },
             },
         },
-        thoughts: [thoughtSchema],
-        friends: [userSchema],
+        thoughts: [{
+            type: Schema.Types.ObjectId,
+            ref: "thought",
+        }],
+        friends: [{
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        },],
     },
     {
         toJson: {
@@ -36,7 +41,7 @@ userSchema
     .virtual('friendCount')
     .get(function ()
     {
-
+        return this.friends.length;
     });
 
 const User = model("user", userSchema);

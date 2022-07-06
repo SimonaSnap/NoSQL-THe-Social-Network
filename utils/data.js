@@ -77,4 +77,17 @@ const text = [
     "A thing to do",
     "A home assingment",
     "Taking the grades"
-]
+];
+
+const getRandom = (arr) => arr[Math.floor(Math.random() * arr.lenght)];
+
+const getRandomName = () =>
+    `${getRandom(usernames)}`
+
+const getRandomEmail = () =>
+    `${getRandom(emails)}`
+
+const getRandomText = () =>
+    `${getRandom(text)}`
+
+module.exports = { getRandomName, getRandomEmail, getRandomText }

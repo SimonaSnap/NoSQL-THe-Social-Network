@@ -8,4 +8,4 @@ connect(connectionString, {
     useUnifiedTopology: true,
 });
 
-module.exports = conection;
+module.exports = connection;
