@@ -1,10 +1,10 @@
 const { Schema, model } = require("mongoose");
 const formateDate = require("../utils/date");
 
-const reactionSchema = new mongoose.Schema({
+const reactionSchema = new Schema({
     reactionId: {
-        type: mongoose.Types.ObjectId,
-        default: () => new mongoose.Types.ObjectId(),
+        type: Schema.Types.ObjectId,
+        default: () => new Schema.Types.ObjectId(),
     },
     reactionBody: {
         type: String,

@@ -79,7 +79,7 @@ const text = [
     "Taking the grades"
 ];
 
-const getRandom = (arr) => arr[Math.floor(Math.random() * arr.lenght)];
+const getRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 const getRandomName = () =>
     `${getRandom(usernames)}`

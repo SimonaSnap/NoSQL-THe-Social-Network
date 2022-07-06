@@ -9,7 +9,6 @@ connection.once("open", async () =>
     console.log("connection successful");
 
     await User.deleteMany({});
-
     await Thought.deleteMany({});
 
     const users = [];
@@ -17,9 +16,9 @@ connection.once("open", async () =>
 
     for (let i = 0; i < 5; i++)
     {
-        users.push({
-            thoughtText: getRandomText(),
-            username: getRandomName(),
+        thoughts.push({
+            thoughtText: getRandomText(5),
+            username: getRandomName(5),
         });
     }
 
@@ -29,7 +28,7 @@ connection.once("open", async () =>
     {
         users.push({
             username: thought.username,
-            email: getRandomEmail(),
+            email: getRandomEmail(5),
             thoughts: [thought._id],
         });
     });
@@ -37,6 +36,7 @@ connection.once("open", async () =>
     await User.collection.insertMany(users);
 
     console.table(users);
+    console.table(thoughts);
     console.info("seeds complete");
     process.exit(0);
 });
