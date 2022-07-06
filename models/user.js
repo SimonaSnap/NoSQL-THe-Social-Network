@@ -40,3 +40,5 @@ userSchema
     });
 
 const User = model("user", userSchema);
+
+model.exports = User;
