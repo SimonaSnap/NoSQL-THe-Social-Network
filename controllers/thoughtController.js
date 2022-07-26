@@ -1,4 +1,4 @@
-const { User, Thought } = require("../models");
+const { Thought } = require("../models");
 
 module.exports = {
 
@@ -54,7 +54,7 @@ module.exports = {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
             { $pull: { reactions: { reactionId: req.params.reactionId } } },
-            { runValidators: true, new: true }
+            //{ runValidators: true, new: true }
         )
             .then((reaction) => !reaction
                 ? res.status(400).json({ message: "No reaction at this id" })
@@ -63,12 +63,10 @@ module.exports = {
     },
     addReaction(req, res)
     {
-        Thought.findOneandUpdate(
-            { _id: req.params.thoughtId },
-            { $addToSet: { reactions: req.body } },
+        Thought.findOneAndUpdate({ _id: req.params.thoughtId },
+            { $addToSet: req.body },
             { runValidators: true, new: true }
-        )
-            .then((reaction) => res.json(reaction)
-            ).catch((err) => res.status(500).json(err));
+        ).then((reaction) => res.json(reaction)
+        ).catch((err) => res.status(500).json(err))
     }
 };
